@@ -32,3 +32,14 @@ reset.css root.js'imize en üstte import ederiz ki önce tüm css özelliklerini
 
 Tailwind kurulduktan sonra tailwind.config.js dosyası içerisinde bulunan content: [] içerisine tailwind'i hangi dosyalarda kullanacağımızı belirtmeliyiz. Eğer tüm projede
 kullanacak isek content: ['./app/**/*'] olarak belirtebiliriz.
+
+Flowbite > tailwind ile yazılmış component'ler sunar. Install ettikten sonra tailwind.config.js altında;
+plugins: [require("flowbite/plugin")] ve yine content kısmına tailwind'i ekledigimiz gibi,
+content: ["./node_modules/flowbite-ract/**/*.js"] olarak belirtmeliyiz.
+
+Componentleri kullandığımız yerin import'ların üst adımına da "use-client"; eklememiz gerekiyor.
+
+-CSS-inJS kullanımına bak! (genelde bir lib folder içerisine konuşlandırılır)
+
+Sass kullanımı için Sass install edildikten sonra hemen yazmaya başlayabiliriz.
+styles.module.scss olarak dosya oluşturulur.
