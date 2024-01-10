@@ -1,0 +1,34 @@
+Static route oluşturmak için;
+
+örneğin; about isminde bir klasör oluşturup o klasör altında page.js isminde bir dosyayi kurguladığımız an, /about ile artık o route'a erişebiliriz.
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Dynamic route oluşturmak için;
+
+örneğin; [blog] isminde bir klasör oluşturup (köşeli parantezler içinde), altında page.js isminde bir dosyayi kurguladigimiz an, bu blog ve diger tüm random
+route'lara erişimi açacak fakat eğer yazdığımız route tarafında o isimde bir static route varsa o ağır basacak ve o route'a erişmiş olacağız.
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Catch all routes;
+
+Dynamic route örneğindeki dosya ismini [...blog] olarak değiştirirsek eğer, link sonuna artik sınırsız sayıda erişimimiz olacak
+örneğin; localhost:3000/random1/random2/random3 ...
+
+ipucu; component içinde {params} ile {params.blog} yazdırılıp incelenebilir
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Optional Catch all routes;
+
+Örneğin app altında docs klasörü ve onun altında da [...post] klasörü oluşturduktan sonra o klasörün de altına page.js oluşturursak, url'e şu şekilde ulaşabiliriz;
+localhost:3000/docs/random1 veya daha fazla /docs/random1/random2... ekleyebiliriz.
+ve docs klasörü altına yani main sayabileceğimiz klasör altına bir page.js daha eklersem, ona da static gibi erişebiliriz. localhost:3000/docs > docs root page
+
+veya daha doğru bir yöntem olarak; docs altındaki page.js'i silip, [...post] olarak oluşturduğum klasörü çift köşeli parantez haline getiriyorum > [[...post]]
+böylelikle bu hem /docs linkini optional olarak algılayacak hem de yine diğer alt route'lari da algilayacak.
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Route Grouping;
+Bir süre sonra klasör yapıları fazla olacağından karışıklığı engellemek adına, örnek olarak sadece adminlerin veya sadece userların görebileceği sayfaları SADECE DUZENLI GOREBILMEK ICIN
+(admin) ve (user) isminde normal parantezler ile klasörler açılıp bunların içine routelar yerleştirilebilir. (Herhangi bir etkisi yoktur, sadece düzenlemek içindir)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+CSS;
+reset.css root.js'imize en üstte import ederiz ki önce tüm css özelliklerini sıfırlasın. Daha sonrasında kendi global.css'imizi altına import ederek kullanmaya devam edebiliriz.
+
+Tailwind kurulduktan sonra tailwind.config.js dosyası içerisinde bulunan content: [] içerisine tailwind'i hangi dosyalarda kullanacağımızı belirtmeliyiz. Eğer tüm projede
+kullanacak isek content: ['./app/**/*'] olarak belirtebiliriz.
