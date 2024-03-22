@@ -29,9 +29,11 @@ Bir süre sonra klasör yapıları fazla olacağından karışıklığı engelle
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 CSS;
 reset.css root.js'imize en üstte import ederiz ki önce tüm css özelliklerini sıfırlasın. Daha sonrasında kendi global.css'imizi altına import ederek kullanmaya devam edebiliriz.
+(ek not; global.css'imizi tüm projeye uygulatacaksak RootLayout'a import ederiz.)
 
 Tailwind kurulduktan sonra tailwind.config.js dosyası içerisinde bulunan content: [] içerisine tailwind'i hangi dosyalarda kullanacağımızı belirtmeliyiz. Eğer tüm projede
 kullanacak isek content: ['./app/**/*'] olarak belirtebiliriz.
+Ek olarak; global.css içerisine gerekli olan tailwind ayarını da eklemek gerekir. (@ ile başlayan alanlar)
 
 Flowbite > tailwind ile yazılmış component'ler sunar. Install ettikten sonra tailwind.config.js altında;
 plugins: [require("flowbite/plugin")] ve yine content kısmına tailwind'i ekledigimiz gibi,

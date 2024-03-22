@@ -1,0 +1,37 @@
+Server-Side Rendering; Sitenin/uygulamanın server tarafında render olması, daha sonrasında render olan alanın son kullanıcıya yollanma işlemidir.
+
+Client-Side Rendering; Sitenin/uygulamanın son kullanıcının cihazında render olma işlemidir.
+
+Nasıl anlaşılır? => araştır
+
+(Avantajlar - Dezavantajlar)
+- Client-Side ise SEO optimizasyonu yapılamaz.
+- Server-Side kullanıcıların cihazlarından genelde daha hızlıdır. Performans açısından avantajlıdır.
+
+Next.JS projesinde sayfaların Client-Side çalışmasını istersek;
+Client-Side çalışmasını istediğimiz sayfaların başına "use-client"; ekleyebiliriz.
+
+BILGILER;
+App klasörü altına konulan herhangi bir file Server-Side render edilir.
+console.log("test") olarak bir kelime ekrana yazdırılmaya çalışılarak anlaşılabilir. (Uygulamanın çalıştığı terminalde mi karşımıza çıkacak yoksa İncele altındaki Console bölümünde mi?)
+(ayni zamanda Network sekmesinde Preview altında da console'a yazdırdıklarımızı görebiliyorsak o kısımlar server'da render edilmiştir. Fakat client tarafında render edilse dahi,
+bu preview altında gözükebilir çünkü react arkaplanda sayfalari statik olarak bir kere taramakta.)
+
+yarn install server-only diyip import edersek istediğimiz component'i server'da çalıştırabiliriz.
+
+!!! next.config.js dosyasının içerisine reactStrictMode: false verirsek useEffect içerisinde yaptıracağımız işlemler bir kere çalışır.
+
+-------------------------------------------------------------------------------
+
+ServerSide altında ClientSide altında tekrardan ServerSide Component çalıştırmak istersek;
+- Örneğin;
+Hakkımızda page.js içerisinde
+
+<div>
+	Hakkimizda
+	<Input>
+		<Button /> bu şekilde en baştaki ServerSide olanin içine gömmeliyiz. Input Component'i yani Client-Side component altında yaparsam Button da Client Side olarak çalışırdı.
+	</Input>
+</div>
+
+Ek olarak bu şekilde çalışması için; <Input> componenti içerisine gidip; function Input({ children }) olarak onu alıp <div>Input {children}</div> olarak onu belirtmeliyiz!
