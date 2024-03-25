@@ -35,3 +35,48 @@ Hakkımızda page.js içerisinde
 </div>
 
 Ek olarak bu şekilde çalışması için; <Input> componenti içerisine gidip; function Input({ children }) olarak onu alıp <div>Input {children}</div> olarak onu belirtmeliyiz!
+
+-----------------------------------------------------------------------------------
+
+DATA FETCHING;
+
+next için basit bir örnek olarak json datasi alma;
+const getData = async () => {
+	const res = await fetch("link")
+	return res.json;
+}
+
+bunu başka bir component veya sayfada çağırmak istersek tek aktarabilme yöntemimiz başına export koyarak onu dışarı aktarmak ve daha sonra onu kullanacagımız yerde
+import etmek.
+
+Sürekli değişken olan data'lar ile çalışırken opsiyonel olarak;
+const res = await fetch("link", { cache: no-store })
+diyerek her sayfaya refresh için data'yı alabiliriz.
+
+Ayrıca revalidate özelliği ile de belirli bir saniye/dakika o sayfaya tekrar istek atımını kontrol ettirebiliriz.(ARASTIR)
+
+
+Bir sayfada birden fazla api isteği atılacaksa;
+const data = getData();
+const data2 = getData2();
+const data3 = getData3();
+
+const [data1Result, data2Result, data3Result] = await Promise.all([data, data2, data3]);
+
+yaparak await ile hepsini bloklamadan ayrı ayrı datalari fetch edip kullanabiliriz.
+
+NEXT.JS'IN ÖNERİSİ;
+Eğer 2. atılacak istek 1. istekten gelen herhangi bir değere bağımlı ise;
+2. atılacak istek bir component yapılabilir ve daha sonrasında o component içerisinde 2. istek atıldıktan sonra
+bu 1. isteğimizi attıgımız ana component içinde kullanılabilir.
+
+MUTATING;
+Sepete bir ürün eklendiğinde güncellenmesi olarak örnek verilebilir.
+router.refresh, incele...
+
+PRERENDER;
+Dinamik olacak sayfaları örneğin; post/1, post/2... next.js üzerinden önden indirtebiliriz.
+export async function generateStaticParams() { //FONKSIYON ADI AYNEN BU ŞEKILDE OLMALIDIR!!!
+	const posts = await getAllPosts(); //öncelikle tüm postları alıyoruz.
+	return posts.map(post => ({ id: `${post.id}` })) //daha sonrasında onların id'lerini dönüyoruz.
+}
