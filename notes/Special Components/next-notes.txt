@@ -1,0 +1,55 @@
+LINK COMPONENT;
+window.history; gezdiğimiz sayfaları kendi içerisinde hafızasına alır.
+<Link> Tagimize replace={true} özelliğini katarsak window.history'e kayıt atmayacaktır!
+
+prefetch={false} yapilirsa da önceden fetch edilmez.
+
+IMAGE COMPONENT;
+next.js <Image> taginde width ve height değerlerini bilmek istiyor. (Eğer dinamik bir image ise)
+fill={true} geçilirse o image otomatik parent'in 100% üne yayılmakta.
+quality={10} örnek olarak kalite ayarlanabilir
+placeholder={blur} image yüklenene kadar yedek bir efekt verir. (dinamik olacaksa blurDataURL girmek zorunludur. Ayrica linki girilmeli)
+onLoad veya onLoadingComplete ile resim tamamen yüklendiğinde ne yapılmasını istiyorsak bunu da ayrıca kullanabiliriz.
+onError ile resim yüklenmesi sırasında hata alınırsa ne yapılmasını istiyorsak bunu da ayrıca kullanabiliriz.
+image loader için custom loader yapmak istersek loader={customLoader} verebiliriz. (daha sonrasi için bakilabilir)
+unoptimized={true} verilirse de next.js'in Image tag'i için sundugu optimizasyonları iptal ederiz.
+priority de verilerek sayfadaki öncelik yüklenecek resmi belirleyebiliriz.
+Fazlasi için next.js sayfasina bak.
+
+dışarıdan dinamik bir img alacaksak bunu next.config.js içerisinde belirtmeliyiz.
+Örnek olarak;
+const nextConfig = {
+	images: {
+		remotePatterns: [{ protocol: "https", hostname: "picsum.photos" }],
+	}
+}
+
+yine ayni next.config.js içerisinde;
+deviceSizes: [500, 968],
+olarak cihazlarımızın piksellerini verebiliriz.
+imageSizes ise imageSize için kullanilir;
+imageSizes: [475, 768]
+Çok önerilmez...
+
+FONT COMPONENT;
+npm install @next/font
+
+import { Inter, Open_Sans } from "@next/font/google";
+
+const interFont = Inter({ subsets: ["latin"] });
+const openSansFont = Open_Sans({ subsets: ["latin"] });
+
+<p className={interFont.className}>Test</p>
+
+Tüm websitede bunu basmak istersek ana layout içerisine bunu import edip body tag'ine className olarak verebiliriz.
+
+SCRIPT COMPONENT;
+<Script src="script.js" />
+
+onLoad ile script yüklendiğinde bir işlem yapılabilir.
+onReady script yüklendiğinde ve kullanıma hazır olduğunda bir işlem yapılabilir.
+onError ise script yüklenirken bir sorun oluşması durumda bir işlem yapılabilir.
+
+next.js sayfasından strategy adımlarına da bak!
+
+not; script event'leri kullanilacaksa "use-client" da kullanilmali
