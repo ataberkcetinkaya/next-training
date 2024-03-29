@@ -1,0 +1,42 @@
+const router = useRouter();
+NE ZAMAN KULLANILIR?
+Link component'ten farklı olarak, linke bağlı olmadan kullanıcının yaptığı herhangi bir aksiyon sonrasında
+bir logic'e bağlı olarak karar verdirtip başka bir sayfaya route etmesidir. (örneğin; login. Öncesinde api isteği ve kontrol gerçekleşir, sonrasında route edilir)
+(use client kullanır)
+
+router.push('font')
+router.replace(`/use-router?search=${Math.random().toFixed()}`) //push yerine replace kullanırsak ne kadar route edersek edelim tek hamlede geri gelirsek, en başa döner. (örn; haber sayfaları. hatırla)
+router.refresh()
+router.back()
+router.forward()
+router.prefetch('/font')
+
+-------------------------------------------------------------------
+
+useSearchParams
+
+const searchParams = useSearchParams();
+
+const page = searchParams.get("page"); localhost:3000/use-search-params?page=12
+const order = searchParams.get("order");
+
+------------------------------------------------------------------
+
+usePathname
+
+const pathName = usePathname();
+
+bulunduğumuz sayfanın path'ini verir.
+
+------------------------------------------------------------------
+
+useSelectedLayoutSegment
+
+Kullanıldığı layout'un içerisinde iken o component hangi layout'ta render ediliyorsa onun bir altındaki segmenti verir.
+(klasördeki png'lere bak)
+
+-------------------------------------------------------------------
+
+useSelectedLayoutSegments (çoğul)
+
+farklı olarak daha aşağı seviyedeki segmentleri de verir.
