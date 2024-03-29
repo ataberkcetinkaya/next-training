@@ -1,0 +1,35 @@
+COOKIES
+-------
+import { cookies } from "next/headers";
+
+function CookiePage() {
+	const nextCookies = cookies();
+	console.log(nextCookies.getAll());
+	
+HEADERS
+-------
+import { headers } from "next/headers";
+
+function Headers() {
+	const headersList = headers();
+	
+FETCH
+-----
+const staticData = await fetch(`https://...`, { cache: 'force-cache' }); (DEFAULT)
+ 
+const dynamicData = await fetch(`https://...`, { cache: 'no-store' });
+
+const revalidateData = await fetch(`https://...`, { next: { revalidate: 10 }, });
+
+const postExample = await fetch(`${API_URL}/1`, { body: JSON.stringify({}), method: "POST" });
+
+REDIRECT
+--------
+Örneğin; bir kullanıcı admin sayfasını görmeden ServerSide tarafında tokeni var mı diye kontrol edip ona göre işlem yaptırılabilir.
+
+import { redirect } from "next/navigation";
+
+if(searchParams.redirectMe) {
+	redirect("/font");
+}
+	
