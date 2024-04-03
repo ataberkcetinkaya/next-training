@@ -1,0 +1,33 @@
+Route Segment Config - incele
+
+------------------------------
+
+API Routes:
+next.js version 13 için pages => api => altında herhangi bir klasör tanımlayıp index.js belirtmek
+
+-apikey, secretkey gibi bilgileri apiroute arkasına gömülebilir.
+-gizli bir endpoint'e gitmek istediğimizde de bunun arkasına gömülebilir.
+
+------------------------------
+
+on-demand Revalidation - incele
+
+------------------------------
+
+Middleware
+
+-örn. olarak bir kullanıcı manuel elle "/admin" yazip o alana ulaşmasını engellemek. (check for isLogin? isAdmin?)
+
+-diğer bir örn. olarak BotProtection yazılabilir. Botların bazı özel sayfaları indexlemesini engellemek için userAgent'i check edilebilir.
+
+app klasörü ile aynı seviyede bir middleware.js tanimlanip örnekler yapilabilir.
+
+export const config = {
+	//matcher: ["/about/:path*", "/dashboard/:path*"],
+	//matcher: "/panel", => panel page
+	matcher: "/panel/:path*", => panel ve onun altındaki her şey
+};
+
+yapılarak tüm proje değil de sadece seçilen alanlarda check yaptırılabilir.
+
+örnek projedeki middleware.js dosyasını incele!
