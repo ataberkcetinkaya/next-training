@@ -1,0 +1,112 @@
+const nextConfig = (phase) => {
+	if(phase === PHASE_DEVELOPMENT_SERVER) {
+		return {
+			...
+		};
+	}
+	
+	return {
+		// Phases except dev
+	}
+};
+
+yukarıdaki şekilde phase ile yarn dev ile mi çalıştırıldı yoksa prod'ta mı ayaklandırıldı, buna göre config yapılabilir.
+
+
+ENVIRONMENT VARIABLES;
+----------------------
+.env olarak standart bir .env dosyası yaratılabilir veya ortama göre de yapılabilir. Örneğin; .env.local, .env.test...
+
+use-client kullanılırsa, console'a basmayacaktır.
+client side tarafından .env tarafında bir bilgiye ulaşmak isterse next.config.js içerisine;
+
+const nextConfig = {
+	env: {
+		API_URL: process.env.API_URL,
+	},
+};
+
+client'tan ulaşmanın bir diğer yolu;
+.env içerisinde örnek olarak tanımladığımız API_URL başına NEXT_PUBLIC_ koyarsakta olur => NEXT_PUBLIC_API_KEY
+
+
+BASE PATH;
+----------
+Normal şartlarda bizim projelerimiz "/" altında tüm yapıyı render eder. örnek, localhost:3000/
+bunun önüne bir prefix koyup tüm uygulamayı o prefix altında render etmek istersek, next.config.js içerisinde;
+
+const nextConfig = {
+	basePath: "/panel",
+};
+
+dememiz yeterli olacaktır.
+
+
+REWRITES;
+--------
+Örneğin;
+bizim sürekli olarak kullandığımız bir linkimiz var ve bu linki sosyal medyada çok kez paylaştık. Paylaştıktan sonra bu link değişecek fakat eski her yerde
+paylaştığımız link 404'e düşecek. Bunu handle etmemiz gerekecek.
+
+next.config.js dosyasında bir tane async function tanımlıyoruz.
+
+async rewrites() {
+	return [
+		{
+			source: "/old-about",
+			destination: "/about",
+		},
+		{
+			source: "/about/:path*", //about'un altında gelecek olan her türlü path'i destination'a yolla.
+			destination: "/about",
+		},
+		.
+		...Daha fazla örnek için araştır...
+		.
+		{
+			source: "/:path*",
+			missing: [
+				{ type: "header", key: "x-rewrite-me" },
+				{ type: "cookie", key: "accessToken" },
+			],
+			has: [
+				{ type: "query", key: "overrideMe" },
+				{ type: "host", value: "example.com" },
+				{ type: "cookie", key: "authorized", value: "true" },
+			],
+			destination: "/another-page",
+		}
+	]
+}
+
+
+REDIRECTS;
+----------
+Rewrites ile aynı çalışır fakat arama motorlarına indexletmeye zorlar.
+
+async redirects() {
+	return [
+		{
+			source: '/about',
+			destination: '/',
+			permanent: true, //bu kısım true olmalı ki zorlasın.
+		},
+	]
+}
+
+
+HEADERS;
+--------
+Kullanıcı belirtilen sayfaya gelince içerisine header gömmemizi sağlar.
+
+async headers() {
+	return [
+		{
+			source: "/about",
+			headers: [
+				{ key: "test-key", value: "test-value" },
+				{ key: "test-key-2", value: "test-key-2" },
+			],
+		}
+	];
+}
