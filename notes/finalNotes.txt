@@ -1,0 +1,5 @@
+API'lara istek atarken safe olması ve userlar tarafından isteklerin bloklanmaması için rateLimit ekleyebiliriz.
+express-rate-limit
+express-slow-down
+
+incele...
