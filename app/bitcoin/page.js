@@ -45,16 +45,6 @@ export default function page() {
     return () => client.close();
   }, [prevPrice]);
 
-  const iconStyleUp = {
-    fontSize: '36px',
-    color: 'green'
-  };
-
-  const iconStyleDown = {
-    fontSize: '36px',
-    color: 'red'
-  };
-
   return (
     <div className="crypto-container">
       <h2>Bitcoin Price: <span ref={priceTextRef} className="price-text">{loading && <div className="spinner"></div>}{bitcoinPrice && `$${bitcoinPrice}`}</span></h2>
