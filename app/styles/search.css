@@ -1,0 +1,59 @@
+/* Styling the input field */
+.input-area {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+ /* Remove the default focus border */
+  margin-right: 5px;
+}
+/* Styling when the input field is focused */
+.input-area:focus {
+  border-color: #007bff;
+ /* Change border color to blue */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+ /* Add a subtle shadow */
+}
+/* Styling for placeholder text */
+.input-area::placeholder {
+  color: #aaa;
+ /* Light gray color */
+}
+/* Styling for when text is entered into the input field */
+.input-area:not(:placeholder-shown) {
+  border-color: #333;
+ /* Darken border color */
+}
+/* Styling for disabled input */
+.input-area:disabled {
+  background-color: #f5f5f5;
+ /* Light gray background */
+  cursor: not-allowed;
+ /* Show disabled cursor */
+}
+/* Styling for the input wrapper */
+.input-wrapper {
+  display: flex;
+ /* Display children inline */
+}
+/* Styling for the search button */
+.search-button {
+  padding: 10px 15px;
+  background-color: #007bff;
+ /* Blue color */
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+ /* White text color */
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+ /* Smooth transition */
+}
+/* Hover effect for the search button */
+.search-button:hover {
+  background-color: #0056b3;
+ /* Darker blue on hover */
+}

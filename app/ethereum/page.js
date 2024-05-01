@@ -19,7 +19,7 @@ export default function page() {
       };
       client.onmessage = (message) => {
         const data = JSON.parse(message.data);
-        const formattedPrice = parseFloat(data.p).toFixed(2);
+        const formattedPrice = parseFloat(data.p).toLocaleString('en-US', { maximumFractionDigits: 2 });
         setBitcoinPrice(formattedPrice);
         setLoading(false); //Make it false when the data is loaded
   
