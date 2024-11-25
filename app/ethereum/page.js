@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
 import '../styles/index.css';
 import '@fortawesome/fontawesome-free/css/all.css';
+import Head from 'next/head';
 
 export default function page() {
     const [bitcoinPrice, setBitcoinPrice] = useState(null);
@@ -46,14 +47,20 @@ export default function page() {
     }, [prevPrice]);
   
     return (
-      <div className="crypto-container">
-        <h2>Ethereum Price: <span ref={priceTextRef} className="price-text">{loading && <div className="spinner"></div>}{bitcoinPrice && `$${bitcoinPrice}`}</span></h2>
-        {arrowDirection === 'up' && (
-        <i className="fas fa-angle-up" style={{ fontSize: '36px', color: 'green' }}></i>
-        )}
-        {arrowDirection === 'down' && (
-          <i className="fas fa-angle-down" style={{ fontSize: '36px', color: 'red' }}></i>
-        )}
-      </div>
+      <>
+        <Head>
+          <title>Ethereum - {bitcoinPrice}</title>
+          <meta name="Price" content="The Updated Ethereum Price" />
+        </Head>
+        <div className="crypto-container">
+          <h2>Ethereum Price: <span ref={priceTextRef} className="price-text">{loading && <div className="spinner"></div>}{bitcoinPrice && `$${bitcoinPrice}`}</span></h2>
+          {arrowDirection === 'up' && (
+          <i className="fas fa-angle-up" style={{ fontSize: '36px', color: 'green' }}></i>
+          )}
+          {arrowDirection === 'down' && (
+            <i className="fas fa-angle-down" style={{ fontSize: '36px', color: 'red' }}></i>
+          )}
+        </div>
+      </>
     )
   }
