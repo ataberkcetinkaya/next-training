@@ -9,8 +9,12 @@ export default function page() {
     const router = useRouter();
 
     const handleSearch = () => {
-        router.push(`/${searchTerm}`);
-    }
+      if (searchTerm === '') {
+          alert('Please enter a valid search term');
+      } else {
+          router.push(`/${searchTerm.trim().toLowerCase()}`);
+      }
+    };
 
     const handleChange = (event) => {
         setSearchTerm(event.target.value);

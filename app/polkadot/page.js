@@ -5,14 +5,14 @@ import '../styles/index.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 export default function page() {
-    const [ethereumPrice, setEthereumPrice] = useState(null);
+    const [polkadotPrice, setPolkadotPrice] = useState(null);
     const [loading, setLoading] = useState(true);
     const [prevPrice, setPrevPrice] = useState(null);
     const priceTextRef = useRef(null);
     const [arrowDirection, setArrowDirection] = useState(null);
   
     useEffect(() => {
-      const client = new W3CWebSocket('wss://stream.binance.com:9443/ws/ethusdt@trade');
+      const client = new W3CWebSocket('wss://stream.binance.com:9443/ws/dotusdt@trade');
   
       client.onopen = () => {
         console.log('WebSocket Client Connected');
@@ -20,7 +20,7 @@ export default function page() {
       client.onmessage = (message) => {
         const data = JSON.parse(message.data);
         const formattedPrice = parseFloat(data.p).toLocaleString('en-US', { maximumFractionDigits: 2 });
-        setEthereumPrice(formattedPrice);
+        setPolkadotPrice(formattedPrice);
         setLoading(false); //Make it false when the data is loaded
   
         //Comparing to the previous price
@@ -48,15 +48,15 @@ export default function page() {
     useEffect(() => {
       if (loading) {
         document.title = "Loading...";
-      } else if (ethereumPrice) {
-        document.title = `ETH Price: $${ethereumPrice}`;
+      } else if (polkadotPrice) {
+        document.title = `DOT Price: $${polkadotPrice}`;
       }
-    }, [loading, ethereumPrice]);
+    }, [loading, polkadotPrice]);
   
     return (
       <>
         <div className="crypto-container">
-          <h2>Ethereum Price: <span ref={priceTextRef} className="price-text">{loading && <div className="spinner"></div>}{ethereumPrice && `$${ethereumPrice}`}</span></h2>
+          <h2>Polkadot Price: <span ref={priceTextRef} className="price-text">{loading && <div className="spinner"></div>}{polkadotPrice && `$${polkadotPrice}`}</span></h2>
           {arrowDirection === 'up' && (
           <i className="fas fa-angle-up" style={{ fontSize: '36px', color: 'green' }}></i>
           )}
