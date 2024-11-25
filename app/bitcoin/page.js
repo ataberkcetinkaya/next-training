@@ -45,6 +45,14 @@ export default function page() {
     return () => client.close();
   }, [prevPrice]);
 
+  useEffect(() => {
+    if (loading) {
+      document.title = "Loading...";
+    } else if (bitcoinPrice) {
+      document.title = `BTC Price: $${bitcoinPrice}`;
+    }
+  }, [loading, bitcoinPrice]);
+
   return (
     <div className="crypto-container">
       <h2>Bitcoin Price: <span ref={priceTextRef} className="price-text">{loading && <div className="spinner"></div>}{bitcoinPrice && `$${bitcoinPrice}`}</span></h2>

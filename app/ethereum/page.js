@@ -6,7 +6,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import Head from 'next/head';
 
 export default function page() {
-    const [bitcoinPrice, setBitcoinPrice] = useState(null);
+    const [ethereumPrice, setEthereumPrice] = useState(null);
     const [loading, setLoading] = useState(true);
     const [prevPrice, setPrevPrice] = useState(null);
     const priceTextRef = useRef(null);
@@ -21,7 +21,7 @@ export default function page() {
       client.onmessage = (message) => {
         const data = JSON.parse(message.data);
         const formattedPrice = parseFloat(data.p).toLocaleString('en-US', { maximumFractionDigits: 2 });
-        setBitcoinPrice(formattedPrice);
+        setEthereumPrice(formattedPrice);
         setLoading(false); //Make it false when the data is loaded
   
         //Comparing to the previous price
@@ -45,15 +45,23 @@ export default function page() {
   
       return () => client.close();
     }, [prevPrice]);
+
+    useEffect(() => {
+      if (loading) {
+        document.title = "Loading...";
+      } else if (ethereumPrice) {
+        document.title = `ETH Price: $${ethereumPrice}`;
+      }
+    }, [loading, ethereumPrice]);
   
     return (
       <>
         <Head>
-          <title>Ethereum - {bitcoinPrice}</title>
+          <title>Ethereum - {ethereumPrice}</title>
           <meta name="Price" content="The Updated Ethereum Price" />
         </Head>
         <div className="crypto-container">
-          <h2>Ethereum Price: <span ref={priceTextRef} className="price-text">{loading && <div className="spinner"></div>}{bitcoinPrice && `$${bitcoinPrice}`}</span></h2>
+          <h2>Ethereum Price: <span ref={priceTextRef} className="price-text">{loading && <div className="spinner"></div>}{ethereumPrice && `$${ethereumPrice}`}</span></h2>
           {arrowDirection === 'up' && (
           <i className="fas fa-angle-up" style={{ fontSize: '36px', color: 'green' }}></i>
           )}
