@@ -1,0 +1,44 @@
+.btn-back{
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .55rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(180deg, #1e3a8a 0%, #10266b 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(16, 38, 107, 0.25), inset 0 -2px 6px rgba(255,255,255,0.03);
+  cursor: pointer;
+  transition: transform .14s cubic-bezier(.2,.9,.2,1), box-shadow .14s, filter .14s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-back:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(16, 38, 107, 0.32);
+  filter: brightness(1.03);
+}
+.btn-back:active{
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(16, 38, 107, 0.26);
+  filter: brightness(.98);
+}
+
+.btn-back:focus{
+  outline: 3px solid rgba(59,130,246,0.22);
+  outline-offset: 4px;
+}
+
+.btn-back svg, .btn-back .icon {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  transform: translateX(-2px);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .btn-back { transition: none; transform: none; }
+}

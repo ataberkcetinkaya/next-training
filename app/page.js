@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import styles from './page.module.css'
+import InstagramIcon from './Icons/InstagramIcon'
 
 export default function Home() {
   return (
@@ -66,18 +67,6 @@ export default function Home() {
         </a>
 
         <a
-          href="/polkadot"
-          className={styles.card}
-          //target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Polkadot <span>-&gt;</span>
-          </h2>
-          <p>See Polkadot Live Price.</p>
-        </a>
-
-        <a
           href="/search"
           className={styles.card}
           //target="_blank"
@@ -88,6 +77,21 @@ export default function Home() {
           </h2>
           <p>
             Search any cryptocurreny you want.
+          </p>
+        </a>
+
+        <a
+          href="https://www.instagram.com/ataberkctnky/"
+          className={styles.card}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2>
+            Follow me<span>-&gt;</span>
+          </h2>
+          <p style={{ display: "flex", alignItems: "center", gap: "8px", margin: 0 }}>
+            <InstagramIcon width={32} height={32} fill="white" />
+            ataberkctnky
           </p>
         </a>
       </div>
